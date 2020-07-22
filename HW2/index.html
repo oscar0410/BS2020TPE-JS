@@ -25,34 +25,35 @@
         //表中的數據項
         var bodyData = [{
                 Country: "台灣",
-                Confirmed: "455",
-                Recovery: "440",
-                Death: "7"
+                Confirmed: 455,
+                Recovery: 440,
+                Death: 7
             },
             {
                 Country: "美國",
-                Confirmed: "397萬",
-                Recovery: "116萬",
-                Death: "14.4萬"
+                Confirmed: 3970000,
+                Recovery: 1160000,
+                Death: 144000
             },
             {
                 Country: "巴西",
-                Confirmed: "217萬",
-                Recovery: "147萬",
-                Death: "81,597"
+                Confirmed: 2170000,
+                Recovery: 1470000,
+                Death: 81597
             },
             {
                 Country: "印度",
-                Confirmed: "119萬",
-                Recovery: "75.3萬",
-                Death: "28,732"
+                Confirmed: 1190000,
+                Recovery: 753000,
+                Death: 28732
             },
             {
                 Country: "俄羅斯",
-                Confirmed: "78.9萬",
-                Recovery: "57.2萬",
-                Death: "12,745"
+                Confirmed: 789000,
+                Recovery: 572000,
+                Death: 12745
             },
+            
         ];
         //定義表頭內容
         var headData = ["地區", "已確診", "康復人數", "死亡人數"];
@@ -67,6 +68,7 @@
 
             var table = creatHead(parent, headData); //thead
             creatBody(table, bodyData); //tbody
+            createTotal(table);
 
         }
         //定義創建表頭的函數
@@ -115,6 +117,38 @@
                 }
             })
         };
+
+        function createTotal(table) {
+            // 列總數
+            var rows = table.rows;
+            // 行總數
+            var cells = table.cells;
+            var colums = table.rows[0].cells.length;
+
+            // 產生tr
+            var tbody = document.createElement("tbody");
+            table.appendChild(tbody);
+            tr = document.createElement("tr");
+            tbody.appendChild(tr);
+
+            var td = document.createElement("td");
+            tr.appendChild(td);
+            td.innerHTML = "總計";
+
+            for (let j = 1; j < colums; j++) {
+                var sum = 0;
+                for (let i = 1; i < rows.length - 1; i++) {
+                    var a = parseInt(rows[i].cells[j].innerHTML.trim());
+                    sum = sum + a;
+                }
+                var td = document.createElement("td");
+                tr.appendChild(td);
+                td.innerHTML = sum;
+            }
+
+
+
+        }
     </script>
 </body>
 
